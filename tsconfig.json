@@ -5,25 +5,30 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": true,
+    "noEmit": false, // <-- CHANGEMENT IMPORTANT : Permet la compilation si nécessaire.
     "esModuleInterop": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    // "jsx": "preserve", // <-- SUPPRIMÉ : Inutile sans React/Next.js frontend
     "incremental": true,
     "plugins": [
-      {
-        "name": "next"
-      }
+      // { "name": "next" } // <-- SUPPRIMÉ : Ceci est le plus important !
     ],
     "paths": {
-      "@/*": ["./*"],
+      // "@/*": ["./*"], // <-- OPTIONNEL : Peut être supprimé si non utilisé
       "payload-config": ["./payload.config.ts"]
     },
-    "target": "es2022"
+    "target": "es2022",
+    "outDir": "./dist" // <-- AJOUTÉ : Où les fichiers JS compilés iront si noEmit est false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "payload.config.ts"],
+  // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "payload.config.ts"], // <-- MODIFIÉ
+  "include": [
+    "./**/*.ts",
+    "src/**/*.ts",
+    "payload.config.ts",
+    "typings/**/*.ts" // Si tu as des fichiers de déclaration TypeScript personnalisés
+  ],
   "exclude": ["node_modules"]
 }
