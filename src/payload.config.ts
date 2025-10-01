@@ -9,18 +9,21 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import Stage from './collections/Stage'
+import Activites from './collections/Activites'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  serverURL: 'http://localhost:3000',
   admin: {
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Stage, Activites],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -30,8 +33,11 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
   sharp,
-  plugins: [
-    payloadCloudPlugin(),
-    // storage-adapter-placeholder
-  ],
+  plugins: [payloadCloudPlugin()],
+  cors: [
+    'http://localhost:3000', // L'URL de ton Payload admin
+    'http://localhost:8080', // L'URL de ton frontend cian.html
+    'http://127.0.0.1:8080',
+    'https://jockobesne.github.io/Nada-Portefolio/cian.html',
+  ], // <-- déplacer ici
 })

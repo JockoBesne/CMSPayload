@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    stage: Stage;
+    activites: Activite;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -77,6 +79,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    stage: StageSelect<false> | StageSelect<true>;
+    activites: ActivitesSelect<false> | ActivitesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -143,7 +147,7 @@ export interface User {
  */
 export interface Media {
   id: string;
-  alt: string;
+  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -155,6 +159,46 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stage".
+ */
+export interface Stage {
+  id: string;
+  nom_entreprise: string;
+  description?: string | null;
+  lien?: string | null;
+  semaine?:
+    | {
+        numero: string;
+        taches?: string | null;
+        competences?: string | null;
+        annexes?: (string | Media)[] | null;
+        id?: string | null;
+      }[]
+    | null;
+  photos?: (string | Media)[] | null;
+  bilan?: string | null;
+  bilan_pdf?: (string | null) | Media;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "activites".
+ */
+export interface Activite {
+  id: string;
+  mois: string;
+  description: string;
+  lieu?: string | null;
+  role?: string | null;
+  photos?: (string | Media)[] | null;
+  audio?: (string | null) | Media;
+  liens?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -170,6 +214,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'stage';
+        value: string | Stage;
+      } | null)
+    | ({
+        relationTo: 'activites';
+        value: string | Activite;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -252,6 +304,44 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "stage_select".
+ */
+export interface StageSelect<T extends boolean = true> {
+  nom_entreprise?: T;
+  description?: T;
+  lien?: T;
+  semaine?:
+    | T
+    | {
+        numero?: T;
+        taches?: T;
+        competences?: T;
+        annexes?: T;
+        id?: T;
+      };
+  photos?: T;
+  bilan?: T;
+  bilan_pdf?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "activites_select".
+ */
+export interface ActivitesSelect<T extends boolean = true> {
+  mois?: T;
+  description?: T;
+  lieu?: T;
+  role?: T;
+  photos?: T;
+  audio?: T;
+  liens?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
