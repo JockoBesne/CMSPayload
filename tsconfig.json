@@ -5,28 +5,23 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "noEmit": false, // CRUCIAL : Permet à tsc de générer des fichiers JS
+    "noEmit": false,
     "esModuleInterop": true,
-    "module": "esnext", // Ou "commonjs" si tu préfères pour Node.js. "esnext" est bon avec "type": "module" dans package.json
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    // "jsx": "preserve", // <-- SUPPRIMÉ : Inutile sans React/Next.js frontend
+
     "incremental": true,
-    // "plugins": [ { "name": "next" } ], // <-- SUPPRIMÉ : C'est la source de problèmes sans Next.js
+
     "paths": {
-      // "@/*": ["./*"], // <-- OPTIONNEL : Peut être supprimé si non utilisé
+      "@/*": ["./*"],
       "payload-config": ["./payload.config.ts"]
     },
     "target": "es2022",
-    "outDir": "./dist" // CRUCIAL : Définit le dossier de sortie pour les fichiers JS compilés
+    "outDir": "./dist"
   },
-  // "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "payload.config.ts"], // <-- LIGNE D'ORIGINE AVEC NEXT.JS
-  "include": [
-    "./**/*.ts", // Inclut tous les fichiers TypeScript du répertoire courant
-    // "src/**/*.ts", // Si ton code source est dans un dossier 'src', décommente cette ligne
-    "payload.config.ts"
-    // "typings/**/*.ts" // Si tu as des fichiers de déclaration TypeScript personnalisés, décommente
-  ],
-  "exclude": ["node_modules", "dist"] // Exclut les dossiers node_modules et dist de la compilation
+
+  "include": ["./**/*.ts", "payload.config.ts"],
+  "exclude": ["node_modules", "dist"]
 }
