@@ -5,11 +5,11 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "tsx server.ts",
-    "start": "tsx server.ts",
+    "dev": "npx tsx server.ts",
+    "start": "npx tsx server.ts",
     "build": "echo \"No traditional build step required as tsx is used directly.\" && exit 0",
-    "generate:types": "payload generate:types",
-    "payload": "payload"
+    "generate:types": "npx payload generate:types",
+    "payload": "npx payload"
   },
   "dependencies": {
     "@payloadcms/db-mongodb": "3.57.0",
