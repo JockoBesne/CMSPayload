@@ -1,20 +1,21 @@
 {
   "name": "mon-portfolio-cms",
   "version": "1.0.0",
-  "description": "CMS Payload déployé sur Render",
+  "description": "Payload CMS déployé sur Render (API + Admin)",
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "payload dev",
-    "build": "payload build",
-    "start": "payload start"
+    "dev": "cross-env NODE_ENV=development payload",
+    "start": "cross-env NODE_ENV=production payload",
+    "build": "echo \"Nothing to build for Payload\""
   },
   "dependencies": {
+    "payload": "3.57.0",
     "@payloadcms/db-mongodb": "3.57.0",
     "@payloadcms/payload-cloud": "3.57.0",
     "@payloadcms/richtext-lexical": "3.57.0",
     "dotenv": "16.4.7",
-    "payload": "3.57.0",
+    "cross-env": "^7.0.3",
     "sharp": "0.34.2"
   },
   "engines": {
