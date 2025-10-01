@@ -5,8 +5,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development payload",
-    "start": "cross-env NODE_ENV=production payload",
+    "dev": "cross-env NODE_ENV=development payload serve",
+    "start": "cross-env NODE_ENV=production payload serve",
     "build": "echo \"Nothing to build for Payload\""
   },
   "dependencies": {
